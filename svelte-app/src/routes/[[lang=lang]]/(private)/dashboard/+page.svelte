@@ -44,7 +44,6 @@
     if ('items' in r) {
       items = prepareMetersForTable(r.items);
 
-      console.log(r.pagination);
       if (r.pagination.has_more) {
         hasMore = () => {
           loadMore(r.items[r.items.length - 1].id);
