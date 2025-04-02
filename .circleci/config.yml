@@ -7,7 +7,7 @@ jobs:
     steps:
       - add_ssh_keys:
          fingerprints:
-           - "SHA256:D5v5W7Cgjwp7YRMC+tmGu5h73CSzGBG/UbwgLMUs7/w"
+           - "SHA256:4QNaLx3S2FVyV3v/amiC20ykSj+ukotcon5UXY4rsyM"
       - checkout
       - run: cp .env.sample .env && make verify
   tag:
@@ -16,7 +16,7 @@ jobs:
     steps:
       - add_ssh_keys:
          fingerprints:
-           - "SHA256:D5v5W7Cgjwp7YRMC+tmGu5h73CSzGBG/UbwgLMUs7/w"
+           - "SHA256:4QNaLx3S2FVyV3v/amiC20ykSj+ukotcon5UXY4rsyM"
       - checkout
       - run: sh scripts/tag.sh
   publish-console:
@@ -25,7 +25,7 @@ jobs:
     steps:
       - add_ssh_keys:
          fingerprints:
-           - "SHA256:D5v5W7Cgjwp7YRMC+tmGu5h73CSzGBG/UbwgLMUs7/w"
+           - "SHA256:4QNaLx3S2FVyV3v/amiC20ykSj+ukotcon5UXY4rsyM"
       - checkout
       - run: sh scripts/publish-console.sh
 
