@@ -1,6 +1,8 @@
-# Backend
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/mekadomus/console/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/mekadomus/console/tree/master)
 
-The front-end for `smart-fluid-flow-meter`. Uses SvelteKit
+# Console
+
+The admin panel where you can manage your Mekadomus devices. Uses SvelteKit
 
 ## Run
 
