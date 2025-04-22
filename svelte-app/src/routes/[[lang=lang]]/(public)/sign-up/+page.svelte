@@ -3,8 +3,10 @@
   import { zxcvbn } from '@zxcvbn-ts/core';
 
   import type { SignUpUserInput } from '@api/User';
+
   import { TurnstileSiteKey } from '@utils/Constants';
   import { signUpUser } from '@api/User';
+  import { localizedHref } from '@src/lib/utils/Lang';
 
   let captchaError = $state(false);
 
@@ -53,7 +55,7 @@
     };
     const res = await signUpUser(data);
     if ('email' in res) {
-      goto('/sign-up-pending');
+      goto(localizedHref('/sign-up-pending'));
     } else {
       formError.style.display = 'block';
     }
@@ -94,7 +96,7 @@
       <button class="button" type="submit" onclick={(e: Event) => signup(e)}>Sign Up</button>
     </div>
     <div class="form-group">
-      <a class="" href="/">I already have an account</a>
+      <a href={localizedHref('/')}>I already have an account</a>
     </div>
   </form>
 </div>

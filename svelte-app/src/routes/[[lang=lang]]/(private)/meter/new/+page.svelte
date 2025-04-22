@@ -8,6 +8,7 @@
   import { createFluidMeter } from '@api/FluidMeter';
   import type { Message } from '@api/Message';
   import { MessageType } from '@api/Message';
+  import { localizedHref } from '@src/lib/utils/Lang';
 
   const globalMessages: SvelteMap<string, Message> = getContext('globalMessages');
 
@@ -25,7 +26,7 @@
     };
     const res = await createFluidMeter(data);
     if ('owner_id' in res) {
-      goto(`/meter/${res.id}/created?name=${encodeURI(res.name)}`);
+      goto(localizedHref(`/meter/${res.id}/created?name=${encodeURI(res.name)}`));
     } else {
       let message: Message = {
         type: MessageType.Error,

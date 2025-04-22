@@ -4,10 +4,12 @@
   import { goto } from '$app/navigation';
 
   import { AuthorizationCookie } from '@utils/Constants';
-  import type { Message } from '@api/Message';
   import { MessageType } from '@api/Message';
   import { deleteCookie } from '@utils/Cookies';
+  import { localizedHref } from '../utils/Lang';
   import { logOut } from '@api/User';
+
+  import type { Message } from '@api/Message';
 
   const globalMessages: SvelteMap<string, Message> = getContext('globalMessages');
 
@@ -15,7 +17,7 @@
     const status = await logOut();
     if (status == 200) {
       deleteCookie(AuthorizationCookie);
-      goto('/');
+      goto(localizedHref('/'));
     } else {
       let message: Message = {
         type: MessageType.Error,
@@ -27,9 +29,9 @@
 </script>
 
 <header>
-  <a href="/dashboard"
-    ><img alt="Mekadomus logo" src="/header-logo.png" width="150" height="85" /></a
-  >
+  <a href={localizedHref('/dashboard')}
+    ><img alt="Mekadomus logo" src="/header-logo.png" width="150" height="85" />
+  </a>
   <button id="log-out" onclick={() => logout()}>Log out</button>
 </header>
 

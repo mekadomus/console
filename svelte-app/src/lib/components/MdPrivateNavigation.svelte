@@ -1,6 +1,10 @@
+<script lang="ts">
+  import { localizedHref } from '@utils/Lang';
+</script>
+
 <nav>
-  <a href="/dashboard">Dashboard</a>
-  <a href="/meter/new">Create Fluid Meter</a>
+  <span><a href={localizedHref('/dashboard')}>Dashboard</a></span>
+  <span><a href={localizedHref('/meter/new')}>Create Fluid Meter</a></span>
 </nav>
 
 <style>
@@ -10,14 +14,14 @@
     display: flex;
   }
 
-  a {
+  span a {
     display: block;
     padding: 0.5rem;
     text-decoration: none;
     color: var(--primary-color);
   }
 
-  a:hover {
+  span:hover a {
     background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
   }
 </style>

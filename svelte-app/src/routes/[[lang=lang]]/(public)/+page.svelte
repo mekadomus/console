@@ -3,10 +3,12 @@
   import { zxcvbn } from '@zxcvbn-ts/core';
 
   import type { LogInInput } from '@api/User';
+
   import { AuthorizationCookie } from '@utils/Constants';
   import { ErrorCode } from '@api/Error';
   import { logIn } from '@api/User';
   import { setCookie } from '@utils/Cookies';
+  import { localizedHref } from '@src/lib/utils/Lang';
 
   async function login(e: Event) {
     e.preventDefault();
@@ -40,7 +42,7 @@
     const res = await logIn(data);
     if ('token' in res) {
       setCookie(AuthorizationCookie, 'Bearer ' + res.token);
-      goto('/dashboard');
+      goto(localizedHref('/dashboard'));
     } else {
       if ('code' in res && res.code == ErrorCode[ErrorCode.ValidationError]) {
         clientError.style.display = 'block';
@@ -71,8 +73,8 @@
       <button class="button" type="submit" onclick={(e: Event) => login(e)}>Log In</button>
     </div>
     <div class="form-group links">
-      <a class="" href="/password-recovery">Forgot my password</a><br />
-      <a class="" href="/sign-up">I don't have an account</a>
+      <a href={localizedHref('/password-recovery')}>Forgot my password</a><br />
+      <a href={localizedHref('/sign-up')}>I don't have an account</a>
     </div>
   </form>
 </div>

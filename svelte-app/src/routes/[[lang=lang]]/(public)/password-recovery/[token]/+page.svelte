@@ -10,6 +10,7 @@
   import MdCenteredContainer from '@components/MdCenteredContainer.svelte';
   import { MessageType } from '@api/Message';
   import { setNewPassword } from '@api/User';
+  import { localizedHref } from '@src/lib/utils/Lang';
 
   const globalMessages: SvelteMap<string, Message> = getContext('globalMessages');
 
@@ -46,7 +47,7 @@
     };
     const status = await setNewPassword(data);
     if (status == 200) {
-      goto('/');
+      goto(localizedHref('/'));
     } else if (status == 400) {
       let message: Message = {
         type: MessageType.Error,
