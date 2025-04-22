@@ -3,7 +3,7 @@ import { redirect } from '@sveltejs/kit';
 import { AuthorizationCookie } from '@utils/Constants';
 import { me } from '@api/User';
 
-export async function load({ cookies }) {
+export async function load({ cookies, params }) {
   const token = cookies.get(AuthorizationCookie);
   let user;
   if (token) {
@@ -12,7 +12,8 @@ export async function load({ cookies }) {
 
   if (!user || !('email' in user)) {
     cookies.delete(AuthorizationCookie, { path: '/' });
-    redirect(307, '/');
+    const lang = params.lang || 'en';
+    redirect(307, `/${lang}`);
   }
 
   return {

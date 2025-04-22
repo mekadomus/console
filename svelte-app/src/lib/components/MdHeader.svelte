@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { localizedHref } from '../utils/Lang';
 </script>
 
 <header>
-  <a href="/"><img alt="Mekadomus logo" src="/header-logo.png" width="150" height="85" /></a>
+  <a href={localizedHref('/')}>
+    <img alt="Mekadomus logo" src="/header-logo.png" width="150" height="85" />
+  </a>
 </header>
 
 <style>

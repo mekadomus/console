@@ -18,6 +18,7 @@
   import { SeriesGranularity } from '@api/Common';
   import { MessageType } from '@api/Message';
   import MdModal from '@components/MdModal.svelte';
+  import { localizedHref } from '@src/lib/utils/Lang';
 
   const globalMessages: SvelteMap<string, Message> = getContext('globalMessages');
 
@@ -228,7 +229,7 @@
         text: 'Meter deleted'
       };
       globalMessages.set('delete-meter-success', message);
-      goto('/dashboard');
+      goto(localizedHref('/dashboard'));
     } else {
       let message: Message = {
         type: MessageType.Error,

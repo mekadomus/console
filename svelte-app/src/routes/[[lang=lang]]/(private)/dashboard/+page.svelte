@@ -10,6 +10,7 @@
   import MdTable from '@components/MdTable.svelte';
   import { MessageType } from '@api/Message';
   import { getFluidMetersBrowser } from '@api/FluidMeter';
+  import { localizedHref } from '@src/lib/utils/Lang';
 
   const globalMessages: SvelteMap<string, Message> = getContext('globalMessages');
 
@@ -25,7 +26,7 @@
   function prepareMetersForTable(meters: FluidMeter[]) {
     return meters.map((v) => {
       return [
-        `<a href="/meter/${v.id}">${v.name}</a>`,
+        `<a href="${localizedHref('/meter/' + v.id)}">${v.name}</a>`,
         v.id,
         v.status,
         new Date(v.recorded_at).toLocaleString()
@@ -81,7 +82,7 @@
     </div>
   {:else}
     <div class="warning-msg msg">You currently don't own any meters</div>
-    <a class="button" href="/meter/new">Create new meter</a>
+    <a class="button" href={localizedHref('/meter/new')}>Create new meter</a>
   {/if}
 {/if}
 
