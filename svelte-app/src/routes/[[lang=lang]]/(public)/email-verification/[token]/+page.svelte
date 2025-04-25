@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { localizedHref } from '@src/lib/utils/Lang';
+  import { page } from '$app/stores';
 
   type Props = {
     data: {
@@ -12,7 +12,7 @@
 
 {#if status >= 200 && status < 300}
   <div class="success-msg msg">
-    Your e-mail has been verified. You can <a href={localizedHref('/')}>log in</a> now
+    Your e-mail has been verified. You can <a href={`/${$page.params.lang}/`}>log in</a> now
   </div>
 {:else}
   <div class="error-msg msg">The supplied token isn't valid</div>

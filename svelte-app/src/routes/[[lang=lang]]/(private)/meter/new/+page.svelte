@@ -2,13 +2,13 @@
   import { SvelteMap } from 'svelte/reactivity';
   import { getContext } from 'svelte';
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
 
   import MdCenteredContainer from '@components/MdCenteredContainer.svelte';
   import type { CreateFluidMeterInput } from '@api/FluidMeter';
   import { createFluidMeter } from '@api/FluidMeter';
   import type { Message } from '@api/Message';
   import { MessageType } from '@api/Message';
-  import { localizedHref } from '@src/lib/utils/Lang';
 
   const globalMessages: SvelteMap<string, Message> = getContext('globalMessages');
 
@@ -26,7 +26,7 @@
     };
     const res = await createFluidMeter(data);
     if ('owner_id' in res) {
-      goto(localizedHref(`/meter/${res.id}/created?name=${encodeURI(res.name)}`));
+      goto(`/${$page.params.lang}/meter/${res.id}/created?name=${encodeURI(res.name)}`);
     } else {
       let message: Message = {
         type: MessageType.Error,

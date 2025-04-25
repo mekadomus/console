@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import { zxcvbn } from '@zxcvbn-ts/core';
 
   import type { LogInInput } from '@api/User';
@@ -8,7 +9,6 @@
   import { ErrorCode } from '@api/Error';
   import { logIn } from '@api/User';
   import { setCookie } from '@utils/Cookies';
-  import { localizedHref } from '@src/lib/utils/Lang';
 
   async function login(e: Event) {
     e.preventDefault();
@@ -42,7 +42,7 @@
     const res = await logIn(data);
     if ('token' in res) {
       setCookie(AuthorizationCookie, 'Bearer ' + res.token);
-      goto(localizedHref('/dashboard'));
+      goto(`${$page.params.lang}/dashboard`);
     } else {
       if ('code' in res && res.code == ErrorCode[ErrorCode.ValidationError]) {
         clientError.style.display = 'block';
@@ -73,8 +73,8 @@
       <button class="button" type="submit" onclick={(e: Event) => login(e)}>Log In</button>
     </div>
     <div class="form-group links">
-      <a href={localizedHref('/password-recovery')}>Forgot my password</a><br />
-      <a href={localizedHref('/sign-up')}>I don't have an account</a>
+      <a href={`/${$page.params.lang}/password-recovery`}>Forgot my password</a><br />
+      <a href={`/${$page.params.lang}/sign-up`}>I don't have an account</a>
     </div>
   </form>
 </div>

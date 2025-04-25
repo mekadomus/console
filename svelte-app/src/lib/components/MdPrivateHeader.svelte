@@ -2,12 +2,12 @@
   import { SvelteMap } from 'svelte/reactivity';
   import { getContext } from 'svelte';
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
 
   import MdLocalePicker from '@components/MdLocalePicker.svelte';
   import { AuthorizationCookie } from '@utils/Constants';
   import { MessageType } from '@api/Message';
   import { deleteCookie } from '@utils/Cookies';
-  import { localizedHref } from '../utils/Lang';
   import { logOut } from '@api/User';
 
   import type { Message } from '@api/Message';
@@ -18,7 +18,7 @@
     const status = await logOut();
     if (status == 200) {
       deleteCookie(AuthorizationCookie);
-      goto(localizedHref('/'));
+      goto(`/${$page.params.lang}/`);
     } else {
       let message: Message = {
         type: MessageType.Error,
@@ -30,7 +30,7 @@
 </script>
 
 <header>
-  <a href={localizedHref('/dashboard')}
+  <a href={`/${$page.params.lang}/dashboard`}
     ><img alt="Mekadomus logo" src="/header-logo.png" width="150" height="85" />
   </a>
   <div class="controls">
