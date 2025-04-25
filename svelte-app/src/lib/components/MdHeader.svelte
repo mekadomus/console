@@ -1,4 +1,5 @@
 <script lang="ts">
+  import MdLocalePicker from '@components/MdLocalePicker.svelte';
   import { localizedHref } from '../utils/Lang';
 </script>
 
@@ -6,12 +7,15 @@
   <a href={localizedHref('/')}>
     <img alt="Mekadomus logo" src="/header-logo.png" width="150" height="85" />
   </a>
+  <MdLocalePicker />
 </header>
 
 <style>
   header {
     border-bottom: 2px solid var(--primary-color);
-    padding: 0.5rem 2rem;
     color: var(--secondary-color-weak);
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 2rem;
   }
 </style>
