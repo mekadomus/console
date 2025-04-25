@@ -1,12 +1,12 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import { zxcvbn } from '@zxcvbn-ts/core';
 
   import type { SignUpUserInput } from '@api/User';
 
   import { TurnstileSiteKey } from '@utils/Constants';
   import { signUpUser } from '@api/User';
-  import { localizedHref } from '@src/lib/utils/Lang';
 
   let captchaError = $state(false);
 
@@ -55,7 +55,7 @@
     };
     const res = await signUpUser(data);
     if ('email' in res) {
-      goto(localizedHref('/sign-up-pending'));
+      goto(`/${$page.params.lang}/sign-up-pending`);
     } else {
       formError.style.display = 'block';
     }
@@ -96,7 +96,7 @@
       <button class="button" type="submit" onclick={(e: Event) => signup(e)}>Sign Up</button>
     </div>
     <div class="form-group">
-      <a href={localizedHref('/')}>I already have an account</a>
+      <a href={`/${$page.params.lang}/`}>I already have an account</a>
     </div>
   </form>
 </div>

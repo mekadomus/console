@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { localizedHref } from '@utils/Lang';
+  import { page } from '$app/stores';
 </script>
 
 <nav>
-  <span><a href={localizedHref('/dashboard')}>Dashboard</a></span>
-  <span><a href={localizedHref('/meter/new')}>Create Fluid Meter</a></span>
+  <span><a href={`/${$page.params.lang}/dashboard`}>Dashboard</a></span>
+  <span><a href={`/${$page.params.lang}/meter/new`}>Create Fluid Meter</a></span>
 </nav>
 
 <style>

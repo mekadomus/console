@@ -2,6 +2,7 @@
   import { SvelteMap } from 'svelte/reactivity';
   import { getContext } from 'svelte';
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import { zxcvbn } from '@zxcvbn-ts/core';
 
   import type { Message } from '@api/Message';
@@ -10,7 +11,6 @@
   import MdCenteredContainer from '@components/MdCenteredContainer.svelte';
   import { MessageType } from '@api/Message';
   import { setNewPassword } from '@api/User';
-  import { localizedHref } from '@src/lib/utils/Lang';
 
   const globalMessages: SvelteMap<string, Message> = getContext('globalMessages');
 
@@ -47,7 +47,7 @@
     };
     const status = await setNewPassword(data);
     if (status == 200) {
-      goto(localizedHref('/'));
+      goto(`/${$page.params.lang}/`);
     } else if (status == 400) {
       let message: Message = {
         type: MessageType.Error,

@@ -1,10 +1,11 @@
 <script lang="ts">
+  import { page } from '$app/stores';
+
   import MdLocalePicker from '@components/MdLocalePicker.svelte';
-  import { localizedHref } from '../utils/Lang';
 </script>
 
 <header>
-  <a href={localizedHref('/')}>
+  <a href={`/${$page.params.lang}/`}>
     <img alt="Mekadomus logo" src="/header-logo.png" width="150" height="85" />
   </a>
   <MdLocalePicker />

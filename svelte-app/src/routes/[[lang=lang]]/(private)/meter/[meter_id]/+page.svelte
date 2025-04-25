@@ -2,6 +2,7 @@
   import { SvelteMap } from 'svelte/reactivity';
   import { getContext, onMount } from 'svelte';
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
 
   import type { Chart, ChartEvent } from 'chart.js';
   import type { FluidMeterAlerts } from '@api/FluidMeter';
@@ -18,7 +19,6 @@
   import { SeriesGranularity } from '@api/Common';
   import { MessageType } from '@api/Message';
   import MdModal from '@components/MdModal.svelte';
-  import { localizedHref } from '@src/lib/utils/Lang';
 
   const globalMessages: SvelteMap<string, Message> = getContext('globalMessages');
 
@@ -229,7 +229,7 @@
         text: 'Meter deleted'
       };
       globalMessages.set('delete-meter-success', message);
-      goto(localizedHref('/dashboard'));
+      goto(`/${$page.params.lang}/dashboard`);
     } else {
       let message: Message = {
         type: MessageType.Error,
