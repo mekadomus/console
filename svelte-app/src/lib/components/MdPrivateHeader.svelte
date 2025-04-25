@@ -3,6 +3,7 @@
   import { getContext } from 'svelte';
   import { goto } from '$app/navigation';
 
+  import MdLocalePicker from '@components/MdLocalePicker.svelte';
   import { AuthorizationCookie } from '@utils/Constants';
   import { MessageType } from '@api/Message';
   import { deleteCookie } from '@utils/Cookies';
@@ -32,7 +33,12 @@
   <a href={localizedHref('/dashboard')}
     ><img alt="Mekadomus logo" src="/header-logo.png" width="150" height="85" />
   </a>
-  <button id="log-out" onclick={() => logout()}>Log out</button>
+  <div class="controls">
+    <div>
+      <MdLocalePicker />
+    </div>
+    <button id="log-out" onclick={() => logout()}>Log out</button>
+  </div>
 </header>
 
 <style>
@@ -55,5 +61,11 @@
 
   button:hover {
     filter: saturate(0.5);
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 </style>
