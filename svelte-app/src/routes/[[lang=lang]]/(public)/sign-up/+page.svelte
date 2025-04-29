@@ -7,6 +7,15 @@
 
   import { TurnstileSiteKey } from '@utils/Constants';
   import { signUpUser } from '@api/User';
+  import { t, locale, loadTranslations } from '@utils/translations';
+
+  let lang = $state($page.params.lang);
+  locale.set($page.params.lang);
+  $effect(() => {
+    lang = $page.params.lang;
+    locale.set(lang);
+    loadTranslations(lang, 'session');
+  });
 
   let captchaError = $state(false);
 
@@ -67,18 +76,18 @@
 </svelte:head>
 
 <div class="signup">
-  <h1>Sign-up</h1>
+  <h1>{$t('session.sign-up')}</h1>
   <form action="#" method="POST" id="signup-form">
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">{$t('session.email')}</label>
       <input type="email" id="email" name="email" required />
     </div>
     <div class="form-group">
-      <label for="name">Name</label>
+      <label for="name">{$t('session.name')}</label>
       <input type="text" id="name" name="name" required />
     </div>
     <div class="form-group">
-      <label for="password">Password</label>
+      <label for="password">{$t('session.password')}</label>
       <input type="password" id="password" name="password" required />
     </div>
     <div class="form-group">
@@ -90,13 +99,15 @@
     </div>
     <div class="form-group">
       <div id="error" class="error-msg">
-        Seems like we are experiencing some problems. We're working on fixing it.<br />
-        We apologize for the inconvenience.
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $t('session.problems')}
       </div>
-      <button class="button" type="submit" onclick={(e: Event) => signup(e)}>Sign Up</button>
+      <button class="button" type="submit" onclick={(e: Event) => signup(e)}
+        >{$t('session.sign-up-button')}</button
+      >
     </div>
     <div class="form-group">
-      <a href={`/${$page.params.lang}/`}>I already have an account</a>
+      <a href={`/${$page.params.lang}/`}>{$t('session.already-have-account')}</a>
     </div>
   </form>
 </div>

@@ -1,4 +1,16 @@
 <script lang="ts">
+  import { page } from '$app/stores';
+
+  import { t, locale, loadTranslations } from '@utils/translations';
+
+  let lang = $state($page.params.lang);
+  locale.set($page.params.lang);
+  $effect(() => {
+    lang = $page.params.lang;
+    locale.set(lang);
+    loadTranslations(lang, 'meter');
+  });
+
   type Props = {
     data: {
       meter_id: string;
@@ -11,10 +23,11 @@
 </script>
 
 <div class="success-msg msg">
-  Your meter with name <strong>{meter_name}</strong> was created with Id:
-  <strong>{meter_id}</strong>.<br /><br />
-
-  Use this Id to configure your device.
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+  {@html $t('meter.created', { meter_name: meter_name, meter_id: meter_id } as Record<
+    string,
+    string
+  >)}
 </div>
 
 <style>

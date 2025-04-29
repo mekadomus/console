@@ -1,0 +1,23 @@
+{
+  "activate": "Activar",
+  "alerts": "Alertas",
+  "create-button": "Crear",
+  "create-meter": "Crear nuevo medidor",
+  "created": "Tu medidor: <strong>{{meter_name}}</strong> fue creado con ID: <strong>{{meter_id}}</strong>.<br /><br />Usa este ID cuando configures tu dispositivo.",
+  "creation-error": "Lo sentimos. Ocurrió un error creando el medidor.",
+  "deactivate": "Desactivar",
+  "delete-button": "Eliminar",
+  "deleted": "Medidor eliminado",
+  "deletion-confirmation": "¿Eliminar medidor?",
+  "deletion-failed": "Lo sentimos. No pudimos eliminar el medidor.",
+  "dont-delete": "No eliminar",
+  "last-days": "Uso en los últimos 30 días",
+  "litters": "Litros",
+  "month-usage": "Ver últimos 30 dias",
+  "name": "Nombre",
+  "see-granular": "Haz clic en un día para ver información más granular",
+  "status": "Estado",
+  "status-change-error": "Lo sentimos. No pudimos cambiar el estado",
+  "usage-on": "Uso en {{date}}",
+  "utc-times": "Fechas mostradas en UTC"
+}

@@ -9,6 +9,7 @@
   import type { Message } from '@api/Message';
   import type { Series } from '@api/Common';
 
+  import MdModal from '@components/MdModal.svelte';
   import {
     FluidMeterStatus,
     activateFluidMeter,
@@ -16,9 +17,18 @@
     deleteFluidMeter,
     getMeasurementsBrowser
   } from '@api/FluidMeter';
-  import { SeriesGranularity } from '@api/Common';
   import { MessageType } from '@api/Message';
-  import MdModal from '@components/MdModal.svelte';
+  import { SeriesGranularity } from '@api/Common';
+  import { t, locale, loadTranslations } from '@utils/translations';
+
+  let lang = $state($page.params.lang);
+  locale.set($page.params.lang);
+  $effect(() => {
+    lang = $page.params.lang;
+    locale.set(lang);
+    loadTranslations(lang, 'meter');
+    loadTranslations(lang, 'common');
+  });
 
   const globalMessages: SvelteMap<string, Message> = getContext('globalMessages');
 
@@ -123,7 +133,7 @@
         labels: data.map((v: chart_point) => v.label),
         datasets: [
           {
-            label: 'Litters',
+            label: $t('meter.litters'),
             borderColor: 'rgb(12, 196, 247)',
             backgroundColor: 'rgb(12, 196, 247)',
             data: data.map((v) => v.litters)
@@ -156,7 +166,7 @@
             if ('code' in newData) {
               let message: Message = {
                 type: MessageType.Error,
-                text: 'Sorry. We failed to get data.'
+                text: $t('common.generic-error')
               };
               globalMessages.set('retrieve-data-error', message);
             } else {
@@ -191,7 +201,7 @@
     } else {
       let message: Message = {
         type: MessageType.Error,
-        text: 'Sorry. We failed to change the status.'
+        text: $t('meter.status-change-error')
       };
       globalMessages.set('status-change-error', message);
     }
@@ -213,7 +223,7 @@
     if ('code' in newData) {
       let message: Message = {
         type: MessageType.Error,
-        text: 'Sorry. We failed to get data.'
+        text: $t('common.generic-error')
       };
       globalMessages.set('retrieve-data-error', message);
     } else {
@@ -226,14 +236,14 @@
     if ((await deleteFluidMeter(alerts.meter.id)) == 200) {
       let message: Message = {
         type: MessageType.Success,
-        text: 'Meter deleted'
+        text: $t('meter.deleted')
       };
       globalMessages.set('delete-meter-success', message);
       goto(`/${$page.params.lang}/dashboard`);
     } else {
       let message: Message = {
         type: MessageType.Error,
-        text: 'Sorry. We failed to delete the meter.'
+        text: $t('meter.deletion-failed')
       };
       globalMessages.set('delete-meter-error', message);
     }
@@ -243,41 +253,48 @@
 <div class="container">
   <div class={showDeleteModal ? '' : 'hidden'}>
     <MdModal closeCallback={cancelDelete}>
-      <h2>Are you sure you wan't to delete this meter?</h2>
+      <h2>{$t('deletion-confirmation')}</h2>
       <div class="title">
-        <button class="button" onclick={() => doDelete()}>Delete</button>
-        <button class="button" onclick={() => cancelDelete()}>Don't delete</button>
+        <button class="button" onclick={() => doDelete()}>{$t('meter.delete-button')}</button>
+        <button class="button" onclick={() => cancelDelete()}>{$t('meter.dont-delete')}</button>
       </div>
     </MdModal>
   </div>
   <div class="title">
     <h1>{alerts.meter.name} ({alerts.meter.id})</h1>
-    <button class="button2" onclick={() => confirmDelete()}>Delete</button>
+    <button class="button2" onclick={() => confirmDelete()}>{$t('meter.delete-button')}</button>
   </div>
   {#if alerts.alerts.length}
     <div class="alerts">
-      <p><strong>Alerts</strong>:</p>
+      <p><strong>{$t('meter.alerts')}</strong>:</p>
       {#each alerts.alerts as a}
         <span class="alert">{a.alert_type}</span>
       {/each}
     </div>
   {/if}
   <div class="st-container">
-    <p><strong>Status</strong>: {alerts.meter.status}</p>
+    <p><strong>{$t('meter.status')}</strong>: {alerts.meter.status}</p>
     <button class="button" onclick={() => toggleStatus()}>
-      {alerts.meter.status == FluidMeterStatus.Active ? 'Deactivate' : 'Activate'}
+      {alerts.meter.status == FluidMeterStatus.Active
+        ? $t('meter.deactivate')
+        : $t('meter.activate')}
     </button>
   </div>
   {#if selectedDay}
-    <p>{'Usage on ' + new Date(selectedDay).toISOString().split('T')[0]}</p>
-    <button class="button" onclick={() => showMonthUsage()}>Show month usage</button>
+    <p>
+      {$t('meter.usage-on', { date: new Date(selectedDay).toISOString().split('T')[0] } as Record<
+        string,
+        string
+      >)}
+    </p>
+    <button class="button" onclick={() => showMonthUsage()}>$t('meter.month-usage')</button>
   {:else}
-    <p>{'Usage in the last 30 days'}</p>
+    <p>{$t('meter.last-days')}</p>
   {/if}
   <div style="width: 800px;"><canvas id="usage"></canvas></div>
   <p>
-    *Times shown in UTC<br />
-    *Click on a data point to see more granular data for that day
+    *{$t('meter.utc-times')}<br />
+    *{$t('meter.see-granular')}
   </p>
 </div>
 

@@ -1,12 +1,23 @@
 <script lang="ts">
   import { SvelteMap } from 'svelte/reactivity';
   import { getContext } from 'svelte';
+  import { page } from '$app/stores';
 
   import type { Message } from '@api/Message';
   import type { RecoverPasswordInput } from '@api/User';
 
   import { MessageType } from '@api/Message';
   import { recoverPassword } from '@api/User';
+  import { t, locale, loadTranslations } from '@utils/translations';
+
+  let lang = $state($page.params.lang);
+  locale.set($page.params.lang);
+  $effect(() => {
+    lang = $page.params.lang;
+    locale.set(lang);
+    loadTranslations(lang, 'session');
+    loadTranslations(lang, 'common');
+  });
 
   const globalMessages: SvelteMap<string, Message> = getContext('globalMessages');
 
@@ -30,13 +41,13 @@
     if (status == 200) {
       let message: Message = {
         type: MessageType.Success,
-        text: 'Recovery link sent to your e-email'
+        text: $t('session.recovery-sent')
       };
       globalMessages.set('password-recovery-error', message);
     } else {
       let message: Message = {
         type: MessageType.Error,
-        text: 'Sorry. We failed to process your request'
+        text: $t('common.generic-error')
       };
       globalMessages.set('password-recovery-error', message);
     }
@@ -44,15 +55,15 @@
 </script>
 
 <div class="recover-password">
-  <h1>Recover your password</h1>
+  <h1>{$t('session.recover-password')}</h1>
   <form action="#" method="POST" id="rp-form">
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">{$t('session.email')}</label>
       <input type="email" id="email" name="email" required />
     </div>
     <div class="form-group">
       <button class="button" type="submit" onclick={(e: Event) => recoverPasswordHandler(e)}
-        >Recover password</button
+        >{$t('session.recover-button')}</button
       >
     </div>
   </form>

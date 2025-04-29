@@ -1,10 +1,18 @@
 <script lang="ts">
+  import { page } from '$app/stores';
+
+  import { t, locale, loadTranslations } from '@utils/translations';
+
+  let lang = $state($page.params.lang);
+  locale.set($page.params.lang);
+  $effect(() => {
+    lang = $page.params.lang;
+    locale.set(lang);
+    loadTranslations(lang, 'session');
+  });
 </script>
 
-<div class="success-msg">
-  We sent you an e-mail to the provided e-mail address. Please click the confirmation link to finish
-  your signup.
-</div>
+<div class="success-msg">{$t('session.confirmation-email-sent')}</div>
 
 <style>
   .success-msg {

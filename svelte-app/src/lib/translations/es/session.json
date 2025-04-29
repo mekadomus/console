@@ -1,0 +1,23 @@
+{
+  "already-have-account": "Ya tengo una cuenta",
+  "choose-password": "Elige tu nueva contraseña",
+  "confirmation-email-sent": "Enviamos un correo electrónico a la dirección proporcionada. Revisa tu correo para completar tu registro",
+  "email": "Email",
+  "error-resetting": "Lo sentimos. Ocurrió un error restableciendo tu contraseña",
+  "forgot-password": "Olvidé mi contraseña",
+  "invalid-credentials": "Credenciales inválidas. Intenta de nuevo.",
+  "invalid-reset-token": "El token no es válido",
+  "log-in": "Entrar",
+  "log-in-title": "Acceso a usuarios",
+  "name": "Nombre",
+  "no-account": "Soy un nuevo usuario",
+  "password": "Contraseña",
+  "problems": "Estamos teniendo problemas en el sistema. Estamos trabajando en resolverlos.",
+  "recover-button": "Recuperar contraseña",
+  "recover-password": "Recupera tu contraseña",
+  "recovery-sent": "Recibirás un correo electrónico con un enlace para recuperar tu contraseña",
+  "sign-up": "Crear usuario nuevo",
+  "sign-up-button": "Crear",
+  "update-password": "Actualizar contraseña",
+  "weak-password": "La contraseña es muy débil"
+}

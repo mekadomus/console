@@ -1,10 +1,20 @@
 <script lang="ts">
   import { page } from '$app/stores';
+
+  import { t, locale, loadTranslations } from '@utils/translations';
+
+  let lang = $state($page.params.lang);
+  locale.set($page.params.lang);
+  $effect(() => {
+    lang = $page.params.lang;
+    locale.set(lang);
+    loadTranslations(lang, 'navigation');
+  });
 </script>
 
 <nav>
-  <span><a href={`/${$page.params.lang}/dashboard`}>Dashboard</a></span>
-  <span><a href={`/${$page.params.lang}/meter/new`}>Create Fluid Meter</a></span>
+  <span><a href={`/${lang}/dashboard`}>{$t('navigation.dashboard')}</a></span>
+  <span><a href={`/${lang}/meter/new`}>{$t('navigation.create-meter')}</a></span>
 </nav>
 
 <style>
