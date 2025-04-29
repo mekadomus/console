@@ -9,8 +9,18 @@
   import { MessageType } from '@api/Message';
   import { deleteCookie } from '@utils/Cookies';
   import { logOut } from '@api/User';
+  import { t, locale, loadTranslations } from '@utils/translations';
 
   import type { Message } from '@api/Message';
+
+  let lang = $state($page.params.lang);
+  locale.set($page.params.lang);
+  $effect(() => {
+    lang = $page.params.lang;
+    locale.set(lang);
+    loadTranslations(lang, 'header');
+    loadTranslations(lang, 'common');
+  });
 
   const globalMessages: SvelteMap<string, Message> = getContext('globalMessages');
 
@@ -18,11 +28,11 @@
     const status = await logOut();
     if (status == 200) {
       deleteCookie(AuthorizationCookie);
-      goto(`/${$page.params.lang}/`);
+      goto(`/${lang}/`);
     } else {
       let message: Message = {
         type: MessageType.Error,
-        text: 'Sorry. There was an error.'
+        text: $t('common.generic-error')
       };
       globalMessages.set('sign-out-error', message);
     }
@@ -30,14 +40,14 @@
 </script>
 
 <header>
-  <a href={`/${$page.params.lang}/dashboard`}
+  <a href={`/${lang}/dashboard`}
     ><img alt="Mekadomus logo" src="/header-logo.png" width="150" height="85" />
   </a>
   <div class="controls">
     <div>
       <MdLocalePicker />
     </div>
-    <button id="log-out" onclick={() => logout()}>Log out</button>
+    <button id="log-out" onclick={() => logout()}>{$t('header.logout')}</button>
   </div>
 </header>
 

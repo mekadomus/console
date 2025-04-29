@@ -1,5 +1,17 @@
 <script lang="ts">
+  import { page } from '$app/stores';
+
+  import { t, locale, loadTranslations } from '@utils/translations';
+
   let props = $props();
+
+  let lang = $state($page.params.lang);
+  locale.set($page.params.lang);
+  $effect(() => {
+    lang = $page.params.lang;
+    locale.set(lang);
+    loadTranslations(lang, 'table');
+  });
 </script>
 
 <table>
@@ -24,10 +36,10 @@
 </table>
 <nav>
   {#if props.moreCallback}
-    <button type="button" onclick={props.moreCallback}>More</button>
+    <button type="button" onclick={props.moreCallback}>${$t('table.next')}</button>
   {/if}
   {#if props.lessCallback}
-    <button type="button" onclick={props.lessCallback}>More</button>
+    <button type="button" onclick={props.lessCallback}>${$t('table.prev')}</button>
   {/if}
 </nav>
 

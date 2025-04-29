@@ -1,0 +1,9 @@
+{
+  "error-getting-meters": "Sorry. There was an error getting your meters",
+  "name": "Name",
+  "id": "ID",
+  "status": "Status",
+  "creation-date": "Creation date",
+  "no-meters": "You currently don't own any meters",
+  "new-meter": "Create new meter"
+}

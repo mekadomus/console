@@ -1,0 +1,4 @@
+{
+  "invalid-token": "El token de verificación no es valido",
+  "verified": "Tu correo electrónico ha sido verificado. Ya puedes <a href='/es/'>iniciar sesión</a>"
+}

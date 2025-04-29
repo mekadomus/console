@@ -1,6 +1,16 @@
 <script lang="ts">
   import { page } from '$app/stores';
 
+  import { t, locale, loadTranslations } from '@utils/translations';
+
+  let lang = $state($page.params.lang);
+  locale.set($page.params.lang);
+  $effect(() => {
+    lang = $page.params.lang;
+    locale.set(lang);
+    loadTranslations(lang, 'email');
+  });
+
   type Props = {
     data: {
       status: number;
@@ -12,10 +22,11 @@
 
 {#if status >= 200 && status < 300}
   <div class="success-msg msg">
-    Your e-mail has been verified. You can <a href={`/${$page.params.lang}/`}>log in</a> now
+    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+    {@html $t('email.verified')}
   </div>
 {:else}
-  <div class="error-msg msg">The supplied token isn't valid</div>
+  <div class="error-msg msg">{$t('email.invalid-token')}</div>
 {/if}
 
 <style>

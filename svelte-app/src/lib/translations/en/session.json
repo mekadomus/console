@@ -1,0 +1,23 @@
+{
+  "already-have-account": "I already have an account",
+  "choose-password": "Choose your new password",
+  "confirmation-email-sent": "We sent you an e-mail to the provided e-mail address. Please click the confirmation link to finish your signup.",
+  "email": "Email",
+  "error-resetting": "Sorry. There was an error resetting your password.",
+  "forgot-password": "Forgot my password",
+  "invalid-credentials": "Credentials are not valid. Try again.",
+  "invalid-reset-token": "The reset token is not valid",
+  "log-in": "Log In",
+  "log-in-title": "Login",
+  "name": "Name",
+  "no-account": "I don't have an account",
+  "password": "Password",
+  "problems": "Seems like we are experiencing some problems. We're working on fixing it.<br />We apologize for the inconvenience.",
+  "recover-button": "Recover password",
+  "recover-password": "Recover your password",
+  "recovery-sent": "Recovery link sent to your e-email",
+  "sign-up": "Sign-up",
+  "sign-up-button": "Sign Up",
+  "update-password": "Update password",
+  "weak-password": "Password is too weak"
+}

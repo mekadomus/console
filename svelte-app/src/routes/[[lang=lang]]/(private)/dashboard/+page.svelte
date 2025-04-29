@@ -11,6 +11,16 @@
   import MdTable from '@components/MdTable.svelte';
   import { MessageType } from '@api/Message';
   import { getFluidMetersBrowser } from '@api/FluidMeter';
+  import { t, locale, loadTranslations } from '@utils/translations';
+
+  let lang = $state($page.params.lang);
+  locale.set($page.params.lang);
+  $effect(() => {
+    lang = $page.params.lang;
+    locale.set(lang);
+    loadTranslations(lang, 'dashboard');
+    loadTranslations(lang, 'common');
+  });
 
   const globalMessages: SvelteMap<string, Message> = getContext('globalMessages');
 
@@ -55,7 +65,7 @@
     } else {
       let message: Message = {
         type: MessageType.Error,
-        text: 'Sorry. There was an error getting your meters.'
+        text: $t('dashboard.error-getting-meters')
       };
       globalMessages.set('new-meter-error', message);
     }
@@ -72,17 +82,26 @@
 </script>
 
 {#if error}
-  <div class="error-msg msg">There was an error on our side. Sorry for the inconvenience.</div>
+  <div class="error-msg msg">{$t('common.generic-error')}</div>
 {/if}
 
 {#if items}
   {#if items.length}
     <div class="container">
-      <MdTable {items} headers={['Name', 'ID', 'Status', 'Creation date']} moreCallback={hasMore} />
+      <MdTable
+        {items}
+        headers={[
+          $t('dashboard.name'),
+          $t('dashboard.id'),
+          $t('dashboard.status'),
+          $t('dashboard.creation-date')
+        ]}
+        moreCallback={hasMore}
+      />
     </div>
   {:else}
-    <div class="warning-msg msg">You currently don't own any meters</div>
-    <a class="button" href={`/${$page.params.lang}/meter/new`}>Create new meter</a>
+    <div class="warning-msg msg">{$t('dashboard.no-meters')}</div>
+    <a class="button" href={`/${$page.params.lang}/meter/new`}>{$t('dashboard.new-meter')}</a>
   {/if}
 {/if}
 

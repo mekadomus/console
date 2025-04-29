@@ -11,6 +11,15 @@
   import MdCenteredContainer from '@components/MdCenteredContainer.svelte';
   import { MessageType } from '@api/Message';
   import { setNewPassword } from '@api/User';
+  import { t, locale, loadTranslations } from '@utils/translations';
+
+  let lang = $state($page.params.lang);
+  locale.set($page.params.lang);
+  $effect(() => {
+    lang = $page.params.lang;
+    locale.set(lang);
+    loadTranslations(lang, 'session');
+  });
 
   const globalMessages: SvelteMap<string, Message> = getContext('globalMessages');
 
@@ -36,7 +45,7 @@
     }
 
     if (zxcvbn(password.value).score < 3) {
-      password.setCustomValidity('Password is too weak');
+      password.setCustomValidity($t('session.weak-password'));
       form.reportValidity();
       return;
     }
@@ -51,13 +60,13 @@
     } else if (status == 400) {
       let message: Message = {
         type: MessageType.Error,
-        text: 'The reset token is not valid'
+        text: $t('session.invalid-reset-token')
       };
       globalMessages.set('new-password-error', message);
     } else {
       let message: Message = {
         type: MessageType.Error,
-        text: 'Sorry. There was an error resetting your password.'
+        text: $t('session.error-resetting')
       };
       globalMessages.set('new-password-error', message);
     }
@@ -65,15 +74,15 @@
 </script>
 
 <MdCenteredContainer>
-  <h1>Choose your new password</h1>
+  <h1>{$t('session.choose-password')}</h1>
   <form action="#" method="POST" id="np-form">
     <div class="form-group">
-      <label for="password">Password</label>
+      <label for="password">{$t('session.password')}</label>
       <input type="password" id="password" name="password" required />
     </div>
     <div class="form-group">
       <button class="button" type="submit" onclick={(e: Event) => newPassword(e)}
-        >Update password</button
+        >{$t('session.update-password')}</button
       >
     </div>
   </form>

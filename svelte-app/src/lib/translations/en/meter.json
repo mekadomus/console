@@ -1,0 +1,23 @@
+{
+  "activate": "Activate",
+  "alerts": "Alerts",
+  "create-button": "Create",
+  "create-meter": "Create new meter",
+  "created": "Your meter with name <strong>{{meter_name}}</strong> was created with Id: <strong>{{meter_id}}</strong>.<br /><br />Use this Id to configure your device.",
+  "creation-error": "Sorry. There was an error creating the meter.",
+  "deactivate": "Deactivate",
+  "delete-button": "Delete",
+  "deleted": "Meter deleted",
+  "deletion-confirmation": "Are you sure you wan't to delete this meter?",
+  "deletion-failed": "Sorry. We failed to delete the meter.",
+  "dont-delete": "Don't delete",
+  "name": "Name",
+  "last-days": "Usage in the last 30 days",
+  "litters": "Litters",
+  "month-usage": "Show month usage",
+  "see-granular": "Click on a data point to see more granular data for that day",
+  "status": "Status",
+  "status-change-error": "Sorry. We failed to change the status.",
+  "usage-on": "Usage on {{date}}",
+  "utc-times": "Times shown in UTC"
+}

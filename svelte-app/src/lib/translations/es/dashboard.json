@@ -1,0 +1,9 @@
+{
+  "error-getting-meters": "Ocurrió un error cargando tus medidores",
+  "name": "Nombre",
+  "id": "ID",
+  "status": "Estado",
+  "creation-date": "Fecha de creación",
+  "no-meters": "No tienes ningún medidor",
+  "new-meter": "Crear medidor"
+}
