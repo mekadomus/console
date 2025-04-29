@@ -9,7 +9,7 @@
   import { MessageType } from '@api/Message';
   import { deleteCookie } from '@utils/Cookies';
   import { logOut } from '@api/User';
-  import { t, locale, loadTranslations } from '@utils/translations';
+  import { t, locale, loadTranslations } from '@utils/Translations';
 
   import type { Message } from '@api/Message';
 

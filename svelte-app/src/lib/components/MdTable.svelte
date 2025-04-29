@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
 
-  import { t, locale, loadTranslations } from '@utils/translations';
+  import { t, locale, loadTranslations } from '@utils/Translations';
 
   let props = $props();
 

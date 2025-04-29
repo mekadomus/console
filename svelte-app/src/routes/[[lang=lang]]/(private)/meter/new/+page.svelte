@@ -10,7 +10,7 @@
   import MdCenteredContainer from '@components/MdCenteredContainer.svelte';
   import { createFluidMeter } from '@api/FluidMeter';
   import { MessageType } from '@api/Message';
-  import { t, locale, loadTranslations } from '@utils/translations';
+  import { t, locale, loadTranslations } from '@utils/Translations';
 
   let lang = $state($page.params.lang);
   locale.set($page.params.lang);
