@@ -21,6 +21,11 @@ const config = {
     },
     {
       locale: 'en',
+      key: 'error',
+      loader: async () => (await import('@translations/en/error.json')).default
+    },
+    {
+      locale: 'en',
       key: 'header',
       loader: async () => (await import('@translations/en/header.json')).default
     },
@@ -54,6 +59,11 @@ const config = {
       locale: 'es',
       key: 'email',
       loader: async () => (await import('@translations/es/email.json')).default
+    },
+    {
+      locale: 'es',
+      key: 'error',
+      loader: async () => (await import('@translations/es/error.json')).default
     },
     {
       locale: 'es',
