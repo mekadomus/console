@@ -80,7 +80,9 @@ verify: build check-format check-svelte
 # Starts a container with a neovim development environment ready to use
 vim: image
 	@docker build -f dockerfiles/dev-vim -t smart-fluid-flow-meter-frontend-vim-image .
+	@xhost +local:docker
 	@docker run --rm -it \
+		-e DISPLAY=$(DISPLAY) -v /tmp/.X11-unix:/tmp/.X11-unix \
 		-v $(PWD)/svelte-app:/svelte-app \
 		-v $(PWD)/dev-environments/vim/tmp:/root/.local/share/nvim \
 		-w /svelte-app/ \
