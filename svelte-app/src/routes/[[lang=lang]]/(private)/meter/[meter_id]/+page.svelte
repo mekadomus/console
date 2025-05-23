@@ -287,7 +287,7 @@
         string
       >)}
     </p>
-    <button class="button" onclick={() => showMonthUsage()}>$t('meter.month-usage')</button>
+    <button class="button" onclick={() => showMonthUsage()}>{$t('meter.month-usage')}</button>
   {:else}
     <p>{$t('meter.last-days')}</p>
   {/if}
